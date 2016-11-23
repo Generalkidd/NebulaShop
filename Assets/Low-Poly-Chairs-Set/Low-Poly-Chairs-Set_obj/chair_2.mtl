@@ -1,0 +1,23 @@
+# Blender MTL File: 'Low-Poly-Chairs-Set.blend'
+# Material Count: 2
+
+newmtl Material.221
+Ns 21.568627
+Ka 0.000000 0.000000 0.000000
+Kd 0.383394 0.039142 0.079035
+Ks 0.300654 0.070009 0.098040
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\PC\Desktop\Cgtrader\Low-Poly-Chairs-Set\textures\wood_2_2.jpg
+map_Bump C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Kies_SPEC.jpg
+map_Ks C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Kies_SPEC.jpg
+
+newmtl Material.222
+Ns 27.450980
+Ka 0.000000 0.000000 0.000000
+Kd 0.017818 0.017818 0.017818
+Ks 0.088235 0.088235 0.088235
+Ni 1.000000
+d 1.000000
+illum 2

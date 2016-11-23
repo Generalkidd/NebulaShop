@@ -1,0 +1,64 @@
+# Blender MTL File: 'Low-Poly-Chairs-Set.blend'
+# Material Count: 6
+
+newmtl Material.012
+Ns 872.437920
+Ka 0.000000 0.000000 0.000000
+Kd 0.067391 0.053351 0.047735
+Ks 0.099239 0.099239 0.099239
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\PC\Desktop\Cgtrader\Low-Poly-Chairs-Set\textures\Stuhlschanier.jpg
+
+newmtl Material.012_NONE
+Ns 872.437920
+Ka 0.000000 0.000000 0.000000
+Kd 0.067391 0.053351 0.047735
+Ks 0.099239 0.099239 0.099239
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl Material.031
+Ns 43.137255
+Ka 0.000000 0.000000 0.000000
+Kd 0.433987 0.433987 0.433987
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Teppich512X512_NRM.JPG
+map_Kd C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Stuhl_Stoff.jpg
+
+newmtl Material.039
+Ns 0.000000
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd C:\Users\PC\Desktop\Cgtrader\Low-Poly-Chairs-Set\textures\Stuhlschanier.jpg
+
+newmtl Material.046
+Ns 194.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.032938 0.030093 0.027441
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\PC\Desktop\Cgtrader\Low-Poly-Chairs-Set\textures\Stuhl_Lehne.jpg
+map_Bump C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Stuhl_Lehne_NRM Kopie.jpg
+
+newmtl Material.046_NONE
+Ns 194.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.032938 0.030093 0.027441
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Stuhl_Lehne_NRM Kopie.jpg
+map_Kd C:\\Users\\PC\\Desktop\\Cgtrader\\Low-Poly-Chairs-Set\\textures\\Stuhl_Lehne.jpg
