@@ -78,7 +78,7 @@ namespace HoloToolkit.Unity
         /// </summary>
         public GazeStabilizer GazeStabilization { get; private set; }
 
-        private Vector3 gazeOrigin;
+        public Vector3 gazeOrigin;
         private Vector3 gazeDirection;
         private Quaternion gazeRotation;
         private float lastHitDistance = 15.0f;
