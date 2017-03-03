@@ -15,5 +15,6 @@ namespace Assets.Scripts.DataTypes
         public string Email { get; set; }
         public string Price { get; set; }
         public string Model { get; set; }
+        public string Texture { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MenuSelect : MonoBehaviour
 {
@@ -33,6 +34,22 @@ public class MenuSelect : MonoBehaviour
 
     void OnSelect()
     {
+        switch(Action)
+        {
+            case "Shop Online":
+                SceneManager.LoadScene(1);
+                break;
+            case "View A Catalog":
+                SceneManager.LoadScene(2);
+                break;
+            case "Item Placer":
+                //SceneManager.LoadScene(5);
+                break;
+            case "Settings":
+                //SceneManager.LoadScene(6);
+                break;
+        }
+
         if (isReasons)
         {
             Action = this.GetComponent<TextMesh>().text;

@@ -35,6 +35,8 @@ public class MenuManager : MonoBehaviour
 
     private Product product;
 
+    private Cats categories;
+
     // Use this for initialization
     void Start()
     {
@@ -43,8 +45,30 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator Get()
     {
-        var geturi = new Uri("http://40.87.66.169:5073/getdetails/furniture/58239f264d41086272833fec"); //replace your url  
+        var geturi = new Uri("http://40.121.206.106:5073/getcats"); //replace your url  
         var responseGet = UnityWebRequest.Get(geturi.ToString());
+        yield return responseGet.Send();
+        if (responseGet.isError)
+        {
+            Debug.Log(responseGet.error);
+        }
+        else
+        {
+            string response = responseGet.downloadHandler.text;
+            categories = JsonConvert.DeserializeObject<Cats>(response);
+
+            GameObject = GameObject.Find("Option1");
+            GameObject.GetComponent<TextMesh>().text = categories.Categories[0];
+            GameObject = GameObject.Find("Option2");
+            GameObject.GetComponent<TextMesh>().text = categories.Categories[1];
+            GameObject = GameObject.Find("Option3");
+            GameObject.GetComponent<TextMesh>().text = categories.Categories[2];
+            GameObject = GameObject.Find("Option4");
+            GameObject.GetComponent<TextMesh>().text = categories.Categories[3];
+        }
+
+        geturi = new Uri("http://40.121.206.106:5073/getdetails/electronics/58239f264d41086272833fec"); //replace your url  
+        responseGet = UnityWebRequest.Get(geturi.ToString());
         yield return responseGet.Send();
         if (responseGet.isError)
         {
@@ -64,6 +88,15 @@ public class MenuManager : MonoBehaviour
         //    //}
         //    //product = JsonConvert.DeserializeObject<Product>(builder.ToString());
         }
+
+        string url = "http://www.nebulashop.net/uploads/books_mod_kcoleman.obj";
+        WWW www = new WWW(url);
+        yield return www;
+        Instantiate(www.assetBundle.mainAsset);
+        GameObject test = GameObject.Find("book_mod_kcoleman");
+        GameObject.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
+
+        //renderer.material.mainTexture = www.texture;
 
         //if (AdjustmentReasonIds.Count == 0)
         //{
@@ -92,7 +125,7 @@ public class MenuManager : MonoBehaviour
     {
         switch (Action)
         {
-            case "Television":
+            case "electronics":
                 GameObject = GameObject.Find("MenuTitle");
                 GameObject.GetComponent<TextMesh>().text = product.Item;
                 GameObject = GameObject.Find("Option1");
