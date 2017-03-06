@@ -88,6 +88,9 @@
     <Reference Include="Vuforia.UnityExtensions">
       <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="ObjReader">
+      <HintPath>Assets\Plugins\ObjReader\ObjReader.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Common\CameraSettings.cs" />
@@ -106,8 +109,9 @@
     <Compile Include="Assets\Holograms\Support\Spatial Mapping\SpatialMapping.cs" />
     <Compile Include="Assets\Holograms\Support\Underworld\UnderworldReset.cs" />
     <Compile Include="Assets\Holograms\Support\Underworld\UnderworldSound.cs" />
-    <Compile Include="Assets\OBJImport\OBJLoader.cs" />
-    <Compile Include="Assets\OBJImport\TextureLoader.cs" />
+    <Compile Include="Assets\ObjReader\Demo Scripts\Example1_TextAsset.cs" />
+    <Compile Include="Assets\ObjReader\Demo Scripts\Example2_WWW.cs" />
+    <Compile Include="Assets\ObjReader\Demo Scripts\Example3_ExternalFile.cs" />
     <Compile Include="Assets\Scripts\AppleTexture.cs" />
     <Compile Include="Assets\Scripts\DataTypes\Adjustment.cs" />
     <Compile Include="Assets\Scripts\DataTypes\AdjustmentReason.cs" />
@@ -251,7 +255,13 @@
     <None Include="Assets\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
     <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
     <None Include="Assets\JsonDotNet\link.xml" />
-    <None Include="Assets\OBJImport\readme.txt" />
+    <None Include="Assets\ObjReader\ObjReader changelog.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Car_mtl.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Car_obj.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Pig_mtl.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Pig_obj.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Spot_mtl.txt" />
+    <None Include="Assets\ObjReader\Sample Files\Spot_obj.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Scripts\HoloToolkit\Input\Shaders\CursorShader.shader" />
     <None Include="Assets\Scripts\HoloToolkit\SpatialMapping\Shaders\Occlusion.shader" />

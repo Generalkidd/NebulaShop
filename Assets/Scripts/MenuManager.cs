@@ -89,12 +89,38 @@ public class MenuManager : MonoBehaviour
         //    //product = JsonConvert.DeserializeObject<Product>(builder.ToString());
         }
 
-        string url = "http://www.nebulashop.net/uploads/books_mod_kcoleman.obj";
-        WWW www = new WWW(url);
-        yield return www;
-        Instantiate(www.assetBundle.mainAsset);
-        GameObject test = GameObject.Find("book_mod_kcoleman");
-        GameObject.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
+        GameObject temp = GameObject.Find("ObjectManager");
+        temp.GetComponent<Example2_WWW>().GetObj();
+
+        
+
+        //string url = "http://www.nebulashop.net/uploads/books_mod_kcoleman.obj";
+
+        //while (!Caching.ready)
+        //    yield return null;
+        //// Start a download of the given URL
+        //WWW www = WWW.LoadFromCacheOrDownload(url, 1);
+        //yield return www;
+
+        //// Load and retrieve the AssetBundle
+        //AssetBundle bundle = www.assetBundle;
+
+        //// Load the object asynchronously
+        //AssetBundleRequest request = bundle.LoadAssetAsync("book_mod_kcoleman", typeof(GameObject));
+
+        //// Wait for completion
+        //yield return request;
+
+        //// Get the reference to the loaded object
+        //GameObject obj = request.asset as GameObject;
+
+        //// Unload the AssetBundles compressed contents to conserve memory
+        //bundle.Unload(false);
+
+        //// Frees the memory from the web stream
+        //www.Dispose();
+
+        //obj.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
 
         //renderer.material.mainTexture = www.texture;
 
