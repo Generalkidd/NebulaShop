@@ -37,6 +37,8 @@ public class MenuManager : MonoBehaviour
 
     private Cats categories;
 
+    public bool catSelect = false;
+
     // Use this for initialization
     void Start()
     {
@@ -66,6 +68,8 @@ public class MenuManager : MonoBehaviour
             GameObject = GameObject.Find("Option4");
             GameObject.GetComponent<TextMesh>().text = categories.Categories[3];
         }
+
+        catSelect = true;
 
         geturi = new Uri("http://40.121.206.106:5073/getdetails/electronics/58239f264d41086272833fec"); //replace your url  
         responseGet = UnityWebRequest.Get(geturi.ToString());
@@ -162,15 +166,28 @@ public class MenuManager : MonoBehaviour
                 GameObject.GetComponent<TextMesh>().text = product.Seller;
                 GameObject = GameObject.Find("Option4");
                 GameObject.GetComponent<TextMesh>().text = product.Email;
-                GameObject = GameObject.Find("TV_obj");
-                GameObject.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
+                GameObject = GameObject.Find("ObjectManager");
+                GameObject.GetComponent<Example2_WWW>().objFileName = "";
+                GameObject.GetComponent<Example2_WWW>().objTextureName = "";
+                GameObject.GetComponent<Example2_WWW>().GetObj();
+                //GameObject.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
                 Action = "";
                 break;
-            case "Decrease":
-                Count--;
-                Increment--;
+            case "books":
+                GameObject = GameObject.Find("MenuTitle");
+                GameObject.GetComponent<TextMesh>().text = product.Item;
+                GameObject = GameObject.Find("Option1");
+                GameObject.GetComponent<TextMesh>().text = product.ItemDesc;
                 GameObject = GameObject.Find("Option2");
-                GameObject.GetComponent<TextMesh>().text = Count.ToString();
+                GameObject.GetComponent<TextMesh>().text = product.Price;
+                GameObject = GameObject.Find("Option3");
+                GameObject.GetComponent<TextMesh>().text = product.Seller;
+                GameObject = GameObject.Find("Option4");
+                GameObject.GetComponent<TextMesh>().text = product.Email;
+                GameObject = GameObject.Find("ObjectManager");
+                GameObject.GetComponent<Example2_WWW>().objFileName = "";
+                GameObject.GetComponent<Example2_WWW>().objTextureName = "";
+                GameObject.GetComponent<Example2_WWW>().GetObj();
                 Action = "";
                 break;
             case "Next":

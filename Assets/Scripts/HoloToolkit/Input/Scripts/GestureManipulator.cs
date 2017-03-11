@@ -66,7 +66,7 @@ namespace HoloToolkit.Unity
         private void BeginManipulation(InteractionSourceKind sourceKind)
         {
             // Check if the gesture manager is not null, we're currently focused on this Game Object, and a current manipulation is in progress.
-            if (gestureManager != null && gestureManager.FocusedObject != null && gestureManager.FocusedObject == gameObject && gestureManager.ManipulationInProgress)
+            if (gestureManager != null && gestureManager.FocusedObject != null && gestureManager.FocusedObject == gameObject && gestureManager.ManipulationInProgress && this.GetComponent<ItemModeSelect>().isRotation == false)
             {
                 Manipulating = true;
 

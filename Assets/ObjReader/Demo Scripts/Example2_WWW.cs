@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
+using HoloToolkit.Unity;
 
 public class Example2_WWW : MonoBehaviour {
 
@@ -60,13 +61,30 @@ public class Example2_WWW : MonoBehaviour {
 	//}
 	IEnumerator GetTexture()
     {
-        WWW www = new WWW("http://nebulashop.net/uploads/newtex2_tex_KCP.jpg");
+        WWW www = new WWW(objTextureName);
         yield return www;
         GameObject temp;
-        temp = GameObject.Find("Box01");
+        temp = GameObject.Find("New Game Object");
         temp.GetComponent<Renderer>().material.mainTexture = www.texture;
-        temp.GetComponent<Transform>().transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
-        temp.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
+        //temp.GetComponent<Transform>().transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+        temp.GetComponent<Transform>().transform.localRotation = new Quaternion(180f, 0f, 0f, 0f);
+        temp.GetComponent<Transform>().transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        temp.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.2f, 3f);
+        ApplyScripts();
+    }
+
+    void ApplyScripts()
+    {
+        GameObject temp;
+        temp = GameObject.Find("New Game Object");
+        temp.AddComponent<GestureManipulator>();
+        temp.AddComponent<Interpolator>();
+        temp.AddComponent<RotationManipulator>();
+        temp.AddComponent<BoxCollider>();
+        temp.AddComponent<ItemModeSelect>();
+        temp.AddComponent<SpawnItemMenu>();
+        temp = GameObject.Find("MiniMenu");
+        //temp.GetComponent<MiniSelect>().ObjName = "New Game Object";
     }
 
 	void FocusOnObjects () {
