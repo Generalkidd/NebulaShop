@@ -8,10 +8,11 @@ public class SpawnItemMenu : MonoBehaviour {
 	void Start ()
     {
         GameObject menu = (GameObject)Instantiate(Resources.Load("MiniMenu"));
+        menu.GetComponent<MiniSelect>().ObjName = "New Game Object";
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}

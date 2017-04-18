@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\DataTypes\Adjustment.cs" />
     <Compile Include="Assets\Scripts\DataTypes\AdjustmentReason.cs" />
     <Compile Include="Assets\Scripts\DataTypes\Cats.cs" />
+    <Compile Include="Assets\Scripts\DataTypes\ItemsList.cs" />
     <Compile Include="Assets\Scripts\DataTypes\Part.cs" />
     <Compile Include="Assets\Scripts\DataTypes\Product.cs" />
     <Compile Include="Assets\Scripts\DataTypes\ProductArray.cs" />

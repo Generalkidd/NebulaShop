@@ -3,9 +3,12 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.VR.WSA.Input;
+using UnityEngine.Windows.Speech;
 
 namespace HoloToolkit.Unity
 {
@@ -37,6 +40,11 @@ namespace HoloToolkit.Unity
 
         private bool Manipulating { get; set; }
 
+        public bool isRotation = false;
+
+        KeywordRecognizer keywordRecognizer = null;
+        Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
+
         private void Awake()
         { 
             gestureManager = GestureManager.Instance;
@@ -44,6 +52,38 @@ namespace HoloToolkit.Unity
             if (gestureManager == null)
             {
                 Debug.LogError(string.Format("GestureManipulator on {0} could not find GestureManager instance, manipulation will not function", name));
+            }
+        }
+
+        private void Start()
+        {
+            keywords.Add("Rotate", () =>
+            {
+                OnRotate();
+                this.BroadcastMessage("OnRotate");
+            });
+
+            keywords.Add("Move", () =>
+            {
+                OnMove();
+                this.BroadcastMessage("OnMove");
+            });
+
+            // Tell the KeywordRecognizer about our keywords.
+            keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
+
+            // Register a callback for the KeywordRecognizer and start recognizing!
+            keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+            keywordRecognizer.Start();
+        }
+
+        private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)
+        {
+            System.Action keywordAction;
+            if (keywords.TryGetValue(args.text, out keywordAction))
+            {
+                //isRotation = true;
+                keywordAction.Invoke();
             }
         }
 
@@ -63,10 +103,20 @@ namespace HoloToolkit.Unity
             Manipulating = false;
         }
 
+        void OnRotate()
+        {
+            isRotation = true;
+        }
+
+        void OnMove()
+        {
+            isRotation = false;
+        }
+
         private void BeginManipulation(InteractionSourceKind sourceKind)
         {
             // Check if the gesture manager is not null, we're currently focused on this Game Object, and a current manipulation is in progress.
-            if (gestureManager != null && gestureManager.FocusedObject != null && gestureManager.FocusedObject == gameObject && gestureManager.ManipulationInProgress && this.GetComponent<ItemModeSelect>().isRotation == false)
+            if (gestureManager != null && gestureManager.FocusedObject != null && gestureManager.FocusedObject == gameObject && gestureManager.ManipulationInProgress)
             {
                 Manipulating = true;
 
@@ -77,6 +127,17 @@ namespace HoloToolkit.Unity
                 initialManipulationPosition = Camera.main.transform.InverseTransformPoint(gestureManager.ManipulationPosition);
                 initialObjectPosition = Camera.main.transform.InverseTransformPoint(transform.position);
             }
+            //else if(gestureManager != null && gestureManager.FocusedObject != null && gestureManager.FocusedObject == gameObject && gestureManager.ManipulationInProgress && isRotation == true)
+            //{
+            //    Manipulating = true;
+
+            //    targetInterpolator = gameObject.GetComponent<Interpolator>();
+
+            //    // In order to ensure that any manipulated objects move with the user, we do all our math relative to the camera,
+            //    // so when we save the initial manipulation position and object position we first transform them into the camera's coordinate space
+            //    initialManipulationPosition = Camera.main.transform.InverseTransformPoint(gestureManager.ManipulationPosition);
+            //    initialObjectPosition = Camera.main.transform.InverseTransformPoint(transform.position);
+            //}
         }
 
         private void EndManipulation(InteractionSourceKind sourceKind)
@@ -87,7 +148,7 @@ namespace HoloToolkit.Unity
         // Update is called once per frame
         private void Update()
         {
-            if (Manipulating)
+            if (Manipulating && isRotation == false)
             {
                 // First step is to figure out the delta between the initial manipulation position and the current manipulation position
                 Vector3 localManipulationPosition = Camera.main.transform.InverseTransformPoint(gestureManager.ManipulationPosition);
@@ -117,6 +178,10 @@ namespace HoloToolkit.Unity
                 {
                     transform.position = worldObjectPosition;
                 }
+            }
+            else if(Manipulating && isRotation == true)
+            {
+                transform.Rotate(new Vector3(0, -1 * 2, 0));
             }
         }
     }

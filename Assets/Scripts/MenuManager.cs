@@ -39,6 +39,14 @@ public class MenuManager : MonoBehaviour
 
     public bool catSelect = false;
 
+    public bool itemSelect = false;
+
+    public List<ItemsListJson> tmp;
+
+    public GameObject temp;
+
+    private string currentCat = "";
+
     // Use this for initialization
     void Start()
     {
@@ -93,10 +101,8 @@ public class MenuManager : MonoBehaviour
         //    //product = JsonConvert.DeserializeObject<Product>(builder.ToString());
         }
 
-        GameObject temp = GameObject.Find("ObjectManager");
-        temp.GetComponent<Example2_WWW>().GetObj();
-
-        
+        //GameObject temp = GameObject.Find("ObjectManager");
+        //temp.GetComponent<Example2_WWW>().GetObj();
 
         //string url = "http://www.nebulashop.net/uploads/books_mod_kcoleman.obj";
 
@@ -156,65 +162,147 @@ public class MenuManager : MonoBehaviour
         switch (Action)
         {
             case "electronics":
+                clearMenu();
+                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/electronics"));
                 GameObject = GameObject.Find("MenuTitle");
-                GameObject.GetComponent<TextMesh>().text = product.Item;
-                GameObject = GameObject.Find("Option1");
-                GameObject.GetComponent<TextMesh>().text = product.ItemDesc;
-                GameObject = GameObject.Find("Option2");
-                GameObject.GetComponent<TextMesh>().text = product.Price;
-                GameObject = GameObject.Find("Option3");
-                GameObject.GetComponent<TextMesh>().text = product.Seller;
-                GameObject = GameObject.Find("Option4");
-                GameObject.GetComponent<TextMesh>().text = product.Email;
-                GameObject = GameObject.Find("ObjectManager");
-                GameObject.GetComponent<Example2_WWW>().objFileName = "";
-                GameObject.GetComponent<Example2_WWW>().objTextureName = "";
-                GameObject.GetComponent<Example2_WWW>().GetObj();
-                //GameObject.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.178f, 1.623f);
+                GameObject.GetComponent<TextMesh>().text = "Electronics";
+                currentCat = Action;
                 Action = "";
                 break;
             case "books":
+                clearMenu();
+                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/books"));
                 GameObject = GameObject.Find("MenuTitle");
-                GameObject.GetComponent<TextMesh>().text = product.Item;
-                GameObject = GameObject.Find("Option1");
-                GameObject.GetComponent<TextMesh>().text = product.ItemDesc;
-                GameObject = GameObject.Find("Option2");
-                GameObject.GetComponent<TextMesh>().text = product.Price;
-                GameObject = GameObject.Find("Option3");
-                GameObject.GetComponent<TextMesh>().text = product.Seller;
-                GameObject = GameObject.Find("Option4");
-                GameObject.GetComponent<TextMesh>().text = product.Email;
-                GameObject = GameObject.Find("ObjectManager");
-                GameObject.GetComponent<Example2_WWW>().objFileName = "";
-                GameObject.GetComponent<Example2_WWW>().objTextureName = "";
-                GameObject.GetComponent<Example2_WWW>().GetObj();
+                GameObject.GetComponent<TextMesh>().text = "Books";
+                currentCat = Action;
                 Action = "";
                 break;
-            case "Next":
-                GameObject = GameObject.Find("Option1");
-                GameObject.GetComponent<TextMesh>().text = AdjustmentReasonNames[0];
-                GameObject.GetComponent<MenuSelect>().reasonId = 0;
-                GameObject.GetComponent<MenuSelect>().isReasons = true;
-                GameObject = GameObject.Find("Option2");
-                GameObject.GetComponent<TextMesh>().text = AdjustmentReasonNames[1];
-                GameObject.GetComponent<MenuSelect>().reasonId = 1;
-                GameObject.GetComponent<MenuSelect>().isReasons = true;
-                GameObject = GameObject.Find("Option3");
-                GameObject.GetComponent<TextMesh>().text = AdjustmentReasonNames[2];
-                GameObject.GetComponent<MenuSelect>().reasonId = 2;
-                GameObject.GetComponent<MenuSelect>().isReasons = true;
-                GameObject = GameObject.Find("Option4");
-                GameObject.GetComponent<TextMesh>().text = "Submit";
+            case "furniture":
+                clearMenu();
+                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/furniture"));
+                GameObject = GameObject.Find("MenuTitle");
+                GameObject.GetComponent<TextMesh>().text = "Furniture";
+                currentCat = Action;
                 Action = "";
                 break;
-            case "Submit":
-                if (SelectedReason != -1)
-                {
-                    StartCoroutine(submit());
-                }
+            case "music":
+                clearMenu();
+                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/music"));
+                GameObject = GameObject.Find("MenuTitle");
+                GameObject.GetComponent<TextMesh>().text = "Music";
+                currentCat = Action;
                 Action = "";
+                break;
+            case "Option1":
+                Action = "";
+                temp = GameObject.Find("ObjectManager");
+                temp.GetComponent<Example2_WWW>().GetObj(tmp[0].Model, tmp[0].Texture);
+                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[0].ID));
+                break;
+            case "Option2":
+                Action = "";
+                temp = GameObject.Find("ObjectManager");
+                temp.GetComponent<Example2_WWW>().GetObj(tmp[1].Model, tmp[1].Texture);
+                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[1].ID));
+                break;
+            case "Option3":
+                Action = "";
+                temp = GameObject.Find("ObjectManager");
+                temp.GetComponent<Example2_WWW>().GetObj(tmp[2].Model, tmp[2].Texture);
+                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[2].ID));
+                break;
+            case "Option4":
+                Action = "";
+                temp = GameObject.Find("ObjectManager");
+                temp.GetComponent<Example2_WWW>().GetObj(tmp[3].Model, tmp[3].Texture);
+                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[3].ID));
                 break;
         }
+    }
+
+    void loadMenu()
+    {
+        temp = GameObject.Find("ObjectManager");
+        for (int i = 0; i < tmp.Capacity; i++)
+        {
+            temp.GetComponent<Example2_WWW>().GetObj(tmp[i].Model, tmp[i].Texture);
+            StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[i].ID));
+        }
+    }
+
+    void clearMenu()
+    {
+        GameObject = GameObject.Find("Option1");
+        GameObject.GetComponent<TextMesh>().text = "";
+        GameObject = GameObject.Find("Option2");
+        GameObject.GetComponent<TextMesh>().text = "";
+        GameObject = GameObject.Find("Option3");
+        GameObject.GetComponent<TextMesh>().text = "";
+        GameObject = GameObject.Find("Option4");
+        GameObject.GetComponent<TextMesh>().text = "";
+    }
+
+    IEnumerator getProductInfo(string url)
+    {
+        var geturi = new Uri(url); //replace your url  
+        var responseGet = UnityWebRequest.Get(geturi.ToString());
+        yield return responseGet.Send();
+        if (responseGet.isError)
+        {
+            Debug.Log(responseGet.error);
+        }
+        else
+        {
+            string response = responseGet.downloadHandler.text;
+            product = JsonConvert.DeserializeObject<Product>(response);
+
+            GameObject = GameObject.Find("MenuTitle");
+            GameObject.GetComponent<TextMesh>().text = product.Item;
+            GameObject = GameObject.Find("Option1");
+            GameObject.GetComponent<TextMesh>().text = product.ItemDesc;
+            GameObject = GameObject.Find("Option2");
+            GameObject.GetComponent<TextMesh>().text = product.Price;
+            GameObject = GameObject.Find("Option3");
+            GameObject.GetComponent<TextMesh>().text = product.Seller;
+            GameObject = GameObject.Find("Option4");
+            GameObject.GetComponent<TextMesh>().text = product.Email;
+        }
+    }
+
+    IEnumerator getItems(string url)
+    {
+        var geturi = new Uri(url); //replace your url  
+        var responseGet = UnityWebRequest.Get(geturi.ToString());
+        yield return responseGet.Send();
+        if (responseGet.isError)
+        {
+            Debug.Log(responseGet.error);
+        }
+        else
+        {
+            string response = responseGet.downloadHandler.text;
+            tmp = JsonConvert.DeserializeObject<List<ItemsListJson>>(response);
+
+            int i = 0;
+
+            try
+            {
+                GameObject = GameObject.Find("Option1");
+                GameObject.GetComponent<TextMesh>().text = tmp[0].Item;
+                GameObject = GameObject.Find("Option2");
+                GameObject.GetComponent<TextMesh>().text = tmp[1].Item;
+                GameObject = GameObject.Find("Option3");
+                GameObject.GetComponent<TextMesh>().text = tmp[2].Item;
+                GameObject = GameObject.Find("Option4");
+                GameObject.GetComponent<TextMesh>().text = tmp[3].Item;
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
+
+        itemSelect = true;
     }
 
     void Increase()
@@ -241,7 +329,7 @@ public class MenuManager : MonoBehaviour
     {
         if(Increment != 0)
         {
-            var geturi = new Uri("http://192.168.60.143/hololensapi/adjustments"); //replace your url  
+            var geturi = new Uri(""); //replace your url  
             var adjustment = new Adjustment {Barcode = barcode, Quantity = Increment, ReasonId = AdjustmentReasonIds[SelectedReason] };
             var serializedAdjustment = JsonConvert.SerializeObject(adjustment);
             byte[] adjustmentBytes = Encoding.UTF8.GetBytes(serializedAdjustment);

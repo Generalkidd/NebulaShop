@@ -13,8 +13,10 @@ public class Example2_WWW : MonoBehaviour {
 	string loadingText = "";
 	bool loading = false;
 
-    public void GetObj()
+    public void GetObj(string url1, string url2)
     {
+        objFileName = url1;
+        objTextureName = url2;
         StartCoroutine(Load());
     }
 
@@ -68,7 +70,7 @@ public class Example2_WWW : MonoBehaviour {
         temp.GetComponent<Renderer>().material.mainTexture = www.texture;
         //temp.GetComponent<Transform>().transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
         temp.GetComponent<Transform>().transform.localRotation = new Quaternion(180f, 0f, 0f, 0f);
-        temp.GetComponent<Transform>().transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        temp.GetComponent<Transform>().transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         temp.GetComponent<Transform>().transform.position = new Vector3(-1.042f, 0.2f, 3f);
         ApplyScripts();
     }
@@ -79,7 +81,7 @@ public class Example2_WWW : MonoBehaviour {
         temp = GameObject.Find("New Game Object");
         temp.AddComponent<GestureManipulator>();
         temp.AddComponent<Interpolator>();
-        temp.AddComponent<RotationManipulator>();
+        //temp.AddComponent<RotationManipulator>();
         temp.AddComponent<BoxCollider>();
         temp.AddComponent<ItemModeSelect>();
         temp.AddComponent<SpawnItemMenu>();

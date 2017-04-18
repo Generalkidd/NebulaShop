@@ -61,7 +61,15 @@ public class MenuSelect : MonoBehaviour
         {
             Action = this.GetComponent<TextMesh>().text;
             GameObject tmp = GameObject.Find("MenuTitle");
-            tmp.GetComponent<MenuManager>().Action = Action;
+            if (tmp.GetComponent<MenuManager>().itemSelect == true)
+            {
+                Action = this.name;
+                tmp.GetComponent<MenuManager>().Action = Action;
+            }
+            else
+            {
+                tmp.GetComponent<MenuManager>().Action = Action;
+            }
         }
     }
 }

@@ -33,6 +33,16 @@ public class SpeechManager : MonoBehaviour
             this.BroadcastMessage("Submit");
         });
 
+        keywords.Add("Rotate", () =>
+        {
+            this.BroadcastMessage("OnRotate");
+        });
+
+        keywords.Add("Move", () =>
+        {
+            this.BroadcastMessage("OnMove");
+        });
+
         // Tell the KeywordRecognizer about our keywords.
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
 

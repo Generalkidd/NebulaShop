@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using HoloToolkit.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniSelect : MonoBehaviour
 {
     public string Action = "";
-    public string ObjName = "";
+    public string ObjName = "New Game Object";
 	// Use this for initialization
 	void Start () {
 		
@@ -25,13 +26,13 @@ public class MiniSelect : MonoBehaviour
         {
             case "Move Item":
                 temp = GameObject.Find(ObjName);
-                temp.GetComponent<ItemModeSelect>().isRotation = false;
+                temp.GetComponentInChildren<GestureManipulator>().isRotation = false;
                 resetText();
                 temp.GetComponent<TextMesh>().color = Color.gray;
                 break;
             case "Rotate Item":
-                temp = GameObject.Find(ObjName);
-                temp.GetComponent<ItemModeSelect>().isRotation = true;
+                temp = GameObject.Find("New Game Object");
+                temp.GetComponentInChildren<GestureManipulator>().isRotation = true;
                 resetText();
                 temp.GetComponent<TextMesh>().color = Color.gray;
                 break;
