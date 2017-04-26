@@ -15,7 +15,7 @@ public class AppleTexture : MonoBehaviour
 
     IEnumerator Get()
     {
-        var geturi = new Uri("http://40.121.206.106:5073/getcats"); //replace your url  
+        var geturi = new Uri("http://40.71.214.175:5073/getcats"); //replace your url  
         var responseGet = UnityWebRequest.Get(geturi.ToString());
         yield return responseGet.Send();
         if (responseGet.isError)
@@ -27,7 +27,7 @@ public class AppleTexture : MonoBehaviour
 
         }
 
-        string url = "http://40.121.206.106/uploads/books_tex_kcoleman.jpg";
+        string url = "http://40.71.214.175/uploads/books_tex_kcoleman.jpg";
 
         WWW www = new WWW(url);
         yield return www;

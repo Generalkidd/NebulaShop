@@ -55,7 +55,7 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator Get()
     {
-        var geturi = new Uri("http://40.121.206.106:5073/getcats"); //replace your url  
+        var geturi = new Uri("http://40.71.214.175:5073/getcats"); //replace your url  
         var responseGet = UnityWebRequest.Get(geturi.ToString());
         yield return responseGet.Send();
         if (responseGet.isError)
@@ -79,7 +79,7 @@ public class MenuManager : MonoBehaviour
 
         catSelect = true;
 
-        geturi = new Uri("http://40.121.206.106:5073/getdetails/electronics/58239f264d41086272833fec"); //replace your url  
+        geturi = new Uri("http://40.71.214.175:5073/getdetails/electronics/58239f264d41086272833fec"); //replace your url  
         responseGet = UnityWebRequest.Get(geturi.ToString());
         yield return responseGet.Send();
         if (responseGet.isError)
@@ -163,7 +163,7 @@ public class MenuManager : MonoBehaviour
         {
             case "electronics":
                 clearMenu();
-                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/electronics"));
+                StartCoroutine(getItems("http://40.71.214.175:5073/getitems/electronics"));
                 GameObject = GameObject.Find("MenuTitle");
                 GameObject.GetComponent<TextMesh>().text = "Electronics";
                 currentCat = Action;
@@ -171,7 +171,7 @@ public class MenuManager : MonoBehaviour
                 break;
             case "books":
                 clearMenu();
-                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/books"));
+                StartCoroutine(getItems("http://40.71.214.175:5073/getitems/books"));
                 GameObject = GameObject.Find("MenuTitle");
                 GameObject.GetComponent<TextMesh>().text = "Books";
                 currentCat = Action;
@@ -179,7 +179,7 @@ public class MenuManager : MonoBehaviour
                 break;
             case "furniture":
                 clearMenu();
-                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/furniture"));
+                StartCoroutine(getItems("http://40.71.214.175:5073/getitems/furniture"));
                 GameObject = GameObject.Find("MenuTitle");
                 GameObject.GetComponent<TextMesh>().text = "Furniture";
                 currentCat = Action;
@@ -187,7 +187,7 @@ public class MenuManager : MonoBehaviour
                 break;
             case "music":
                 clearMenu();
-                StartCoroutine(getItems("http://40.121.206.106:5073/getitems/music"));
+                StartCoroutine(getItems("http://40.71.214.175:5073/getitems/music"));
                 GameObject = GameObject.Find("MenuTitle");
                 GameObject.GetComponent<TextMesh>().text = "Music";
                 currentCat = Action;
@@ -197,25 +197,25 @@ public class MenuManager : MonoBehaviour
                 Action = "";
                 temp = GameObject.Find("ObjectManager");
                 temp.GetComponent<Example2_WWW>().GetObj(tmp[0].Model, tmp[0].Texture);
-                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[0].ID));
+                StartCoroutine(getProductInfo("http://40.71.214.175:5073/getdetails/" + currentCat + "/" + tmp[0].ID));
                 break;
             case "Option2":
                 Action = "";
                 temp = GameObject.Find("ObjectManager");
                 temp.GetComponent<Example2_WWW>().GetObj(tmp[1].Model, tmp[1].Texture);
-                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[1].ID));
+                StartCoroutine(getProductInfo("http://40.71.214.175:5073/getdetails/" + currentCat + "/" + tmp[1].ID));
                 break;
             case "Option3":
                 Action = "";
                 temp = GameObject.Find("ObjectManager");
                 temp.GetComponent<Example2_WWW>().GetObj(tmp[2].Model, tmp[2].Texture);
-                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[2].ID));
+                StartCoroutine(getProductInfo("http://40.71.214.175:5073/getdetails/" + currentCat + "/" + tmp[2].ID));
                 break;
             case "Option4":
                 Action = "";
                 temp = GameObject.Find("ObjectManager");
                 temp.GetComponent<Example2_WWW>().GetObj(tmp[3].Model, tmp[3].Texture);
-                StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[3].ID));
+                StartCoroutine(getProductInfo("http://40.71.214.175:5073/getdetails/" + currentCat + "/" + tmp[3].ID));
                 break;
         }
     }
@@ -226,7 +226,7 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < tmp.Capacity; i++)
         {
             temp.GetComponent<Example2_WWW>().GetObj(tmp[i].Model, tmp[i].Texture);
-            StartCoroutine(getProductInfo("http://40.121.206.106:5073/getdetails/" + currentCat + "/" + tmp[i].ID));
+            StartCoroutine(getProductInfo("http://40.71.214.175:5073/getdetails/" + currentCat + "/" + tmp[i].ID));
         }
     }
 
